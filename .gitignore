@@ -1,0 +1,12 @@
+*.env
+*.pyc
+*.pth
+*.pt
+*.patch
+*.egg-info
+*.egg*
+*.spec
+dist/*
+dist_wizard/*
+build/*
+build_wizard/*

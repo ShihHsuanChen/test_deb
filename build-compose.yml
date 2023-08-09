@@ -1,0 +1,10 @@
+commands:
+    build:
+        executable: pyinstaller
+        equalstr: False
+        optional:
+            name: MyCalc
+            additional-hooks-dir: hook_files
+        positional:
+            - "--collect-data mycalc"
+            - "main.py"
