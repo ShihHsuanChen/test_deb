@@ -1,2 +1,3 @@
 pyinstaller
 importlib_metadata
+cmd_config @ git+https://github.com/ShihHsuanChen/cmd_config.git@0.0.5
