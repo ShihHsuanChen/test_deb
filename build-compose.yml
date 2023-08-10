@@ -11,3 +11,16 @@ commands:
         positional:
             - "--collect-data mycalc"
             - "main.py"
+
+    build_deb:
+        executable: bash
+        environment:
+            AppName: "MyCalc"
+            IconFile: "icon.svg"
+            Version: "0.0.1"
+            Description: "this is description"
+            AppPublisher: "muenai Co.,Ltd."
+            AppPublisherEmail: "service@muenai.com"
+            AppUrl: "https://www.muenai.com"
+        positional:
+            build_deb.sh

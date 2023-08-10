@@ -24,7 +24,7 @@ $ config2cmd build-compose.yml -r build
 ## Build Installer for debian
 
 ```sh
-$ ./build_deb.sh
+$ config2cmd build-compose.yml -r build_deb
 ```
 
 # Test install in docker container
