@@ -5,6 +5,9 @@ commands:
         optional:
             name: MyCalc
             additional-hooks-dir: hook_files
+            icon: icon.svg
+        flags:
+            - c
         positional:
             - "--collect-data mycalc"
             - "main.py"

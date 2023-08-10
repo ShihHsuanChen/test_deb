@@ -11,17 +11,25 @@ AppUrl="https://www.muenai.com"
 
 ARCH=$(dpkg --print-architecture)
 WORKDIR=./dist_wizard
-mkdir -p $WORKDIR
 ROOTDIR=$WORKDIR/$AppName
 DEBIAN=$ROOTDIR/DEBIAN
-BIN=$ROOTDIR/usr/bin/$AppExeName
-LIB=$ROOTDIR/usr/lib/$AppName
-DESKTOP=$ROOTDIR/usr/share/applications/$AppExeName.desktop
+ICON_FNAME=$(echo $IconFile | rev | cut -d "/" -f 1 | rev)
+
+BIN=/usr/bin/$AppExeName
+LIB=/usr/lib/$AppName
+ICON=/usr/share/icons/hicolor/scalable/apps/$AppExeName-$ICON_FNAME
+DESKTOP=/usr/share/applications/$AppExeName.desktop
+
+SRC_ICON=$ROOTDIR$ICON
+SRC_BIN=$ROOTDIR$BIN
+SRC_LIB=$ROOTDIR$LIB
+SRC_DESKTOP=$ROOTDIR$DESKTOP
 
 mkdir -p $ROOTDIR
 mkdir -p $ROOTDIR/usr/bin
 mkdir -p $ROOTDIR/usr/lib
 mkdir -p $ROOTDIR/usr/share/applications
+mkdir -p $ROOTDIR/usr/share/icons/hicolor/scalable/apps
 mkdir -p $DEBIAN
 
 
@@ -29,24 +37,26 @@ echo "[Desktop Entry]
 Version=$Version
 Name=$AppName
 Comment=$Description
-Exec=$BIN -ui
+Exec=$BIN
 Path=$LIB
-Icon=$IconFile
+Icon=$ICON
 Terminal=true
 Type=Application
-" > $DESKTOP
+" > $SRC_DESKTOP
 #Categories=Utility;Development;
 
 # copy source files
-if [[ -d "$LIB" ]]; then
-    rm -rf $LIB
+if [[ -d "$SRC_LIB" ]]; then
+    rm -rf $SRC_LIB
 fi
 
-cp -r $SOURCE/ $LIB
-if [[ -f "$BIN" ]]; then
-    rm -f $BIN
+cp -r $SOURCE/ $SRC_LIB
+if [[ -f "$SRC_BIN" ]]; then
+    rm -f $SRC_BIN
 fi
-ln -r -s $LIB/$AppExeName $BIN
+ln -r -s $SRC_LIB/$AppExeName $SRC_BIN
+
+cp -f $IconFile $SRC_ICON
 
 # write control file
 echo "Source: $AppName
